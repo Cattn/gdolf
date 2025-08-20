@@ -4,13 +4,13 @@
 [ext_resource type="PackedScene" uid="uid://bdtup3jb8ptlk" path="res://components/ground.tscn" id="1_qw4io"]
 [ext_resource type="PackedScene" uid="uid://bmb5j1b7e0pmo" path="res://components/dune.tscn" id="2_f0y7y"]
 [ext_resource type="Script" uid="uid://cehht8cqe2uwy" path="res://Ball/ball.gd" id="2_qw4io"]
-[ext_resource type="Texture2D" uid="uid://cs38dtl0jivx1" path="res://Ball/macos.png" id="2_svi5y"]
 [ext_resource type="Script" uid="uid://bdw0ncg3jum3v" path="res://campaign_1/scripts/camera.gd" id="3_cam"]
 [ext_resource type="Script" uid="uid://0tkk1mhnk2vw" path="res://env/deathb.gd" id="4_death"]
 [ext_resource type="Script" uid="uid://d2pmrfwp7lvpn" path="res://Ball/turn.gd" id="5_turn"]
+[ext_resource type="Texture2D" uid="uid://c3vs36olkmq5l" path="res://Ball/Ball1.png" id="8_v0q36"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_28yxm"]
-friction = 0.47
+friction = 0.75
 bounce = 0.24
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_qw4io"]
@@ -31,10 +31,16 @@ position = Vector2(242, 1)
 position = Vector2(487.23, 0)
 
 [node name="Ground3" parent="Ground" instance=ExtResource("1_qw4io")]
-position = Vector2(755, -94)
+position = Vector2(754, -94)
 
 [node name="Ground4" parent="Ground" instance=ExtResource("1_qw4io")]
 position = Vector2(1000, -94)
+
+[node name="Ground5" parent="Ground" instance=ExtResource("1_qw4io")]
+position = Vector2(1245, -191)
+
+[node name="Ground6" parent="Ground" instance=ExtResource("1_qw4io")]
+position = Vector2(975, -384)
 
 [node name="AimingSystem" type="Node2D" parent="."]
 z_index = 100
@@ -64,7 +70,7 @@ script = ExtResource("5_turn")
 position = Vector2(58, 456)
 scale = Vector2(0.212891, 0.212891)
 collision_mask = 6
-mass = 2.39
+mass = 3.178
 physics_material_override = SubResource("PhysicsMaterial_28yxm")
 gravity_scale = 1.33
 script = ExtResource("2_qw4io")
@@ -73,7 +79,7 @@ script = ExtResource("2_qw4io")
 z_index = 10
 z_as_relative = false
 position = Vector2(1.79185e-05, 0)
-texture = ExtResource("2_svi5y")
+texture = ExtResource("8_v0q36")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D"]
 position = Vector2(1.79185e-05, 0)

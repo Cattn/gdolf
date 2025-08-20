@@ -1,0 +1,21 @@
+{
+    "player": {
+        "name": "Player 1",
+        "skills": {
+            "Bigger Hits": 0,
+            "Bouncier Balls": 0,
+            "Longer Shot Times": 0
+        }
+    },
+    "settings": {
+        "volume": 1.0,
+        "fullscreen": false,
+        "resolution": "1920x1080",
+        "vsync": true,
+        "shadows": true,
+        "antialiasing": 2
+    },
+    "options": {
+        "players": 2
+    }
+}

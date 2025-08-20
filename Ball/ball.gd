@@ -3,8 +3,8 @@ const Find = preload("res://utilscripts/find.gd")
 
 @onready var aiming_system = Find.find_aiming_system(self)  # Reference to separate aiming node
 @onready var turn_manager: Node = Find.find_turn_manager(self)
-@export var max_hit_power: float = 2000.0
-@export var min_hit_power: float = 200.0
+@export var max_hit_power: float = 3000.0
+@export var min_hit_power: float = 600.0
 @export var power_charge_time: float = 1.0 
 
 var is_charging_power: bool = false

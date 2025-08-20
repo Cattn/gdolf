@@ -1,0 +1,19 @@
+{
+    "skills": [
+        {
+            "name": "Bigger Hits",
+            "description": "Increases the power of your shots.",
+            "cost": 100
+        },
+        {
+            "name": "Bouncier Balls",
+            "description": "Increases the bounce of your balls.",
+            "cost": 100
+        },
+        {
+            "name": "Longer Shot Times",
+            "description": "Increases the time it takes to charge your shot, allowing for more precise shots.",
+            "cost": 100
+        }
+    ]
+}

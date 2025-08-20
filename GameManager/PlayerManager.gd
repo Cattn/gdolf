@@ -1,13 +1,14 @@
 extends Node
 const Find = preload("res://utilscripts/find.gd")
 
-@export var config_path: String = "res://config/gamemanager.json"
+@export var user_data_source_path: String = "res://config/userdat.json"
+const user_data_path: String = "user://userdat.json"
 
 var number_of_players: int = 1
 var processed_scene: Node = null
 
 func _ready() -> void:
-	_number_of_players_from_config()
+	_load_number_of_players_from_user_data()
 	_try_setup_for_current_scene()
 
 func _process(_delta: float) -> void:
@@ -16,14 +17,41 @@ func _process(_delta: float) -> void:
 		processed_scene = current_scene
 		_try_setup_for_current_scene()
 
-func _number_of_players_from_config() -> void:
+func _load_number_of_players_from_user_data() -> void:
+	var defaults: Dictionary = {}
+	if FileAccess.file_exists(user_data_source_path):
+		var def_text := FileAccess.get_file_as_string(user_data_source_path)
+		var def_data = JSON.parse_string(def_text)
+		if typeof(def_data) == TYPE_DICTIONARY:
+			defaults = def_data
+	var user_data: Dictionary = {}
+	if FileAccess.file_exists(user_data_path):
+		var user_text := FileAccess.get_file_as_string(user_data_path)
+		var parsed = JSON.parse_string(user_text)
+		if typeof(parsed) == TYPE_DICTIONARY:
+			user_data = parsed
+	else:
+		user_data = defaults.duplicate(true)
+	var merged: Dictionary = _merge_defaults(user_data, defaults) as Dictionary
+	var f := FileAccess.open(user_data_path, FileAccess.WRITE)
+	if f:
+		f.store_string(JSON.stringify(merged))
+		f.close()
 	var players := 1
-	if FileAccess.file_exists(config_path):
-		var text := FileAccess.get_file_as_string(config_path)
-		var data = JSON.parse_string(text)
-		if typeof(data) == TYPE_DICTIONARY and data.has("players"):
-			players = int(data["players"])
-	number_of_players = max(1, players)
+	if typeof(merged) == TYPE_DICTIONARY and merged.has("options") and typeof(merged["options"]) == TYPE_DICTIONARY and merged["options"].has("players"):
+		players = int(merged["options"]["players"])
+	number_of_players = clamp(players, 1, 4)
+
+func _merge_defaults(user_data: Variant, defaults: Variant) -> Variant:
+	if typeof(user_data) == TYPE_DICTIONARY and typeof(defaults) == TYPE_DICTIONARY:
+		var out: Dictionary = user_data
+		for k in defaults.keys():
+			if out.has(k):
+				out[k] = _merge_defaults(out[k], defaults[k])
+			else:
+				out[k] = defaults[k]
+		return out
+	return user_data
 
 func _try_setup_for_current_scene() -> void:
 	if number_of_players <= 1:
@@ -38,12 +66,26 @@ func _try_setup_for_current_scene() -> void:
 	for child in parent.get_children():
 		if child is RigidBody2D and child.get_script() == any_ball.get_script():
 			existing_balls.append(child)
-	var to_spawn := number_of_players - existing_balls.size()
+	var to_spawn: int = min(number_of_players, 4) - existing_balls.size()
 	if to_spawn <= 0:
-		return
-	for i in to_spawn:
-		var clone: RigidBody2D = any_ball.duplicate()
-		clone.name = any_ball.name + "_P" + str(existing_balls.size() + 1)
-		parent.add_child(clone)
-		clone.global_position = any_ball.global_position + Vector2(50 * (existing_balls.size()), 0)
-		existing_balls.append(clone)
+		# still ensure textures are set below
+		pass
+	else:
+		for i in to_spawn:
+			var clone: RigidBody2D = any_ball.duplicate()
+			clone.name = any_ball.name + "_P" + str(existing_balls.size() + 1)
+			parent.add_child(clone)
+			clone.global_position = any_ball.global_position + Vector2(50 * (existing_balls.size()), 0)
+			existing_balls.append(clone)
+
+	# Assign per-player textures up to 4 players
+	for i in min(existing_balls.size(), 4):
+		var b: RigidBody2D = existing_balls[i]
+		var sprite: Sprite2D = null
+		if b.has_node("Sprite2D"):
+			sprite = b.get_node("Sprite2D")
+		if sprite:
+			var tex_path := "res://Ball/Ball" + str(i + 1) + ".png"
+			var tex: Texture2D = load(tex_path)
+			if tex:
+				sprite.texture = tex

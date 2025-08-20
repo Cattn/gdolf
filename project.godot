@@ -15,6 +15,10 @@ run/main_scene="uid://wol0a50g3dir"
 config/features=PackedStringArray("4.4", "GL Compatibility")
 config/icon="res://icon.svg"
 
+[autoload]
+
+PlayerManager="*res://GameManager/PlayerManager.gd"
+
 [dotnet]
 
 project/assembly_name="gdolf"
@@ -27,10 +31,6 @@ version_control/autoload_on_startup=true
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/godot_super-wakatime/plugin.cfg")
-
-[autoload]
-
-PlayerManager="*res://GameManager/PlayerManager.gd"
 
 [layer_names]
 
