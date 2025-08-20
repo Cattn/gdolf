@@ -15,7 +15,7 @@ friction = 0.75
 bounce = 0.24
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_qw4io"]
-radius = 136.544
+radius = 29.069
 
 [node name="campaign_1" type="Node2D"]
 
@@ -75,7 +75,6 @@ script = ExtResource("5_turn")
 
 [node name="RigidBody2D" type="RigidBody2D" parent="."]
 position = Vector2(58, 456)
-scale = Vector2(0.212891, 0.212891)
 collision_mask = 6
 mass = 3.178
 physics_material_override = SubResource("PhysicsMaterial_28yxm")
@@ -86,6 +85,7 @@ script = ExtResource("2_qw4io")
 z_index = 10
 z_as_relative = false
 position = Vector2(1.79185e-05, 0)
+scale = Vector2(0.212891, 0.212891)
 texture = ExtResource("8_v0q36")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D"]

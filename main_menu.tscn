@@ -1,3 +1,138 @@
-[gd_scene format=3 uid="uid://wol0a50g3dir"]
+[gd_scene load_steps=7 format=3 uid="uid://wol0a50g3dir"]
+
+[ext_resource type="FontFile" uid="uid://c6y6m0xd87lcd" path="res://fonts/RobotoFlex-VariableFont_GRAD,XOPQ,XTRA,YOPQ,YTAS,YTDE,YTFI,YTLC,YTUC,opsz,slnt,wdth,wght.ttf" id="1_06t4h"]
+[ext_resource type="Script" uid="uid://doqpjubbd7vdt" path="res://scripts/rainbow_outline.gd" id="2_dv7s2"]
+[ext_resource type="Texture2D" uid="uid://c3vs36olkmq5l" path="res://Ball/Ball1.png" id="3_fu7sn"]
+
+[sub_resource type="Theme" id="Theme_7vrkn"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_jix8l"]
+friction = 0.75
+bounce = 0.24
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_glbon"]
+radius = 29.069
 
 [node name="MainMenu" type="Node2D"]
+
+[node name="UI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1153.0
+offset_bottom = 648.0
+
+[node name="Background" type="ColorRect" parent="UI"]
+layout_mode = 0
+offset_right = 1153.0
+offset_bottom = 648.0
+color = Color(0.358496, 0.608422, 0.344052, 1)
+
+[node name="Title Container" type="VBoxContainer" parent="UI"]
+layout_mode = 0
+offset_left = 443.0
+offset_top = 48.0
+offset_right = 721.0
+offset_bottom = 186.0
+alignment = 1
+
+[node name="Label" type="Label" parent="UI/Title Container"]
+layout_mode = 2
+theme = SubResource("Theme_7vrkn")
+theme_type_variation = &"HeaderLarge"
+theme_override_colors/font_color = Color(0.195378, 0.518379, 0.623505, 1)
+theme_override_colors/font_outline_color = Color(0.862676, 0.414813, 0.137925, 1)
+theme_override_constants/outline_size = 13
+theme_override_fonts/font = ExtResource("1_06t4h")
+theme_override_font_sizes/font_size = 100
+text = "Gdolf"
+script = ExtResource("2_dv7s2")
+
+[node name="Buttons" type="VBoxContainer" parent="UI"]
+layout_mode = 0
+offset_left = 244.0
+offset_top = 152.0
+offset_right = 896.0
+offset_bottom = 401.0
+alignment = 1
+
+[node name="StartSolo" type="Button" parent="UI/Buttons"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_06t4h")
+theme_override_font_sizes/font_size = 24
+text = "Start Solo Campaign"
+
+[node name="StartCoop" type="Button" parent="UI/Buttons"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_06t4h")
+theme_override_font_sizes/font_size = 24
+text = "Start Co-op Campaign"
+
+[node name="StartCoop2" type="Button" parent="UI/Buttons"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_06t4h")
+theme_override_font_sizes/font_size = 24
+text = "Versus Mode"
+
+[node name="Options" type="Button" parent="UI/Buttons"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_06t4h")
+theme_override_font_sizes/font_size = 24
+text = "Options"
+
+[node name="StaticBody2D" type="StaticBody2D" parent="UI"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="UI/StaticBody2D"]
+polygon = PackedVector2Array(-1, 417, 39, 477, 154, 558, 269, 616, 396, 647, 1022, 647, 1078, 560, 1116, 431, 1152, 219, 1154, 654, 0, 652)
+
+[node name="Balls" type="Node" parent="UI"]
+
+[node name="RigidBody2D" type="RigidBody2D" parent="UI/Balls"]
+position = Vector2(58, 48)
+mass = 3.178
+physics_material_override = SubResource("PhysicsMaterial_jix8l")
+gravity_scale = 1.33
+
+[node name="Sprite2D" type="Sprite2D" parent="UI/Balls/RigidBody2D"]
+z_index = 10
+z_as_relative = false
+position = Vector2(1.79185e-05, 0)
+scale = Vector2(0.212891, 0.212891)
+texture = ExtResource("3_fu7sn")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="UI/Balls/RigidBody2D"]
+position = Vector2(1.79185e-05, 0)
+shape = SubResource("CircleShape2D_glbon")
+
+[node name="RigidBody2D2" type="RigidBody2D" parent="UI/Balls"]
+position = Vector2(58, 123)
+mass = 3.178
+physics_material_override = SubResource("PhysicsMaterial_jix8l")
+gravity_scale = 1.33
+
+[node name="Sprite2D" type="Sprite2D" parent="UI/Balls/RigidBody2D2"]
+z_index = 10
+z_as_relative = false
+position = Vector2(1.79185e-05, 0)
+scale = Vector2(0.212891, 0.212891)
+texture = ExtResource("3_fu7sn")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="UI/Balls/RigidBody2D2"]
+position = Vector2(1.79185e-05, 0)
+shape = SubResource("CircleShape2D_glbon")
+
+[node name="RigidBody2D3" type="RigidBody2D" parent="UI/Balls"]
+position = Vector2(58, 202)
+mass = 3.178
+physics_material_override = SubResource("PhysicsMaterial_jix8l")
+gravity_scale = 1.33
+
+[node name="Sprite2D" type="Sprite2D" parent="UI/Balls/RigidBody2D3"]
+z_index = 10
+z_as_relative = false
+position = Vector2(1.79185e-05, 0)
+scale = Vector2(0.212891, 0.212891)
+texture = ExtResource("3_fu7sn")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="UI/Balls/RigidBody2D3"]
+position = Vector2(1.79185e-05, 0)
+shape = SubResource("CircleShape2D_glbon")
