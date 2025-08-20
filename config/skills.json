@@ -14,6 +14,11 @@
             "name": "Longer Shot Times",
             "description": "Increases the time it takes to charge your shot, allowing for more precise shots.",
             "cost": 100
+        },
+        {
+            "name": "Double Hit",
+            "description": "Grants you a second hit in the same turn once per campaign.",
+            "cost": 100
         }
     ]
 }
