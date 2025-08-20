@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://wol0a50g3dir"]
+[gd_scene load_steps=8 format=3 uid="uid://wol0a50g3dir"]
 
 [ext_resource type="FontFile" uid="uid://c6y6m0xd87lcd" path="res://fonts/RobotoFlex-VariableFont_GRAD,XOPQ,XTRA,YOPQ,YTAS,YTDE,YTFI,YTLC,YTUC,opsz,slnt,wdth,wght.ttf" id="1_06t4h"]
 [ext_resource type="Script" uid="uid://doqpjubbd7vdt" path="res://scripts/rainbow_outline.gd" id="2_dv7s2"]
 [ext_resource type="Texture2D" uid="uid://c3vs36olkmq5l" path="res://Ball/Ball1.png" id="3_fu7sn"]
+[ext_resource type="Script" uid="uid://bm8lsratm5y82" path="res://scripts/menu.gd" id="4_menu"]
 
 [sub_resource type="Theme" id="Theme_7vrkn"]
 
@@ -14,6 +15,7 @@ bounce = 0.24
 radius = 29.069
 
 [node name="MainMenu" type="Node2D"]
+script = ExtResource("4_menu")
 
 [node name="UI" type="Control" parent="."]
 layout_mode = 3
@@ -61,13 +63,27 @@ theme_override_fonts/font = ExtResource("1_06t4h")
 theme_override_font_sizes/font_size = 24
 text = "Start Solo Campaign"
 
-[node name="StartCoop" type="Button" parent="UI/Buttons"]
+[node name="StartSolo2" type="Button" parent="UI/Buttons"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("1_06t4h")
 theme_override_font_sizes/font_size = 24
 text = "Start Co-op Campaign"
 
-[node name="StartCoop2" type="Button" parent="UI/Buttons"]
+[node name="StartCoop" type="OptionButton" parent="UI/Buttons"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_06t4h")
+theme_override_font_sizes/font_size = 24
+alignment = 1
+selected = 0
+item_count = 3
+popup/item_0/text = "2P"
+popup/item_0/id = 0
+popup/item_1/text = "3P"
+popup/item_1/id = 1
+popup/item_2/text = "4P"
+popup/item_2/id = 2
+
+[node name="StartVS" type="Button" parent="UI/Buttons"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("1_06t4h")
 theme_override_font_sizes/font_size = 24

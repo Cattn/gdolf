@@ -13,6 +13,10 @@ var below_threshold_time: float = 0.0
 var player_balls: Array = []
 var active_index: int = 0
 
+func _ready() -> void:
+	_collect_player_balls()
+	_set_active_player(active_index)
+
 func can_start_shot() -> bool:
 	return is_turn_ready and not is_waiting and _systems_ready_for_ball(ball)
 
@@ -22,8 +26,9 @@ func notify_shot_fired() -> void:
 	below_threshold_time = 0.0
 
 func _physics_process(delta: float) -> void:
-	if player_balls.is_empty():
-		_collect_player_balls()
+	var prev_count := player_balls.size()
+	_collect_player_balls()
+	if player_balls.size() != prev_count:
 		_set_active_player(active_index)
 	if not is_waiting:
 		return

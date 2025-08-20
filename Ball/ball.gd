@@ -41,11 +41,28 @@ func _input(event):
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_LEFT:
 			if event.pressed:
-				if not turn_manager or turn_manager.has_method("can_start_shot") and turn_manager.can_start_shot():
-					is_charging_power = true
-					power_start_time = Time.get_ticks_msec() / 1000.0
+				if turn_manager and turn_manager.has_method("can_start_shot"):
+					if turn_manager.can_start_shot() and _is_active_ball():
+						is_charging_power = true
+						power_start_time = Time.get_ticks_msec() / 1000.0
+				else:
+					if _is_active_ball():
+						is_charging_power = true
+						power_start_time = Time.get_ticks_msec() / 1000.0
 			else:
-				if is_charging_power:
+				if is_charging_power and _is_active_ball():
 					hit_ball()
 					is_charging_power = false
+
+func _is_active_ball() -> bool:
+	if is_in_group("ball"):
+		return true
+	var parent := get_parent()
+	if not parent:
+		return true
+	var count := 0
+	for child in parent.get_children():
+		if child is RigidBody2D and child.get_script() == get_script():
+			count += 1
+	return count <= 1
 

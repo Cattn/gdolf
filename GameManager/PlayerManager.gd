@@ -55,6 +55,20 @@ func _merge_defaults(user_data: Variant, defaults: Variant) -> Variant:
 
 func _try_setup_for_current_scene() -> void:
 	if number_of_players <= 1:
+		var any_ball_sp: RigidBody2D = Find.find_ball(self)
+		if any_ball_sp and any_ball_sp.get_parent():
+			var duplicates: Array = []
+			for child in any_ball_sp.get_parent().get_children():
+				if child is RigidBody2D and child.get_script() == any_ball_sp.get_script():
+					duplicates.append(child)
+			# single player setup
+			for i in range(duplicates.size()):
+				var b: RigidBody2D = duplicates[i]
+				b.set_process_input(true)
+				if b.is_in_group("ball"):
+					b.remove_from_group("ball")
+				if i > 0:
+					b.queue_free()
 		return
 	var any_ball: RigidBody2D = Find.find_ball(self)
 	if not any_ball:
