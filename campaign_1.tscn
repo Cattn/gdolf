@@ -20,15 +20,21 @@ radius = 136.544
 
 [node name="Ground" type="Node" parent="."]
 
-[node name="StaticBody2D" parent="Ground" instance=ExtResource("1_qw4io")]
+[node name="Ground1" parent="Ground" instance=ExtResource("1_qw4io")]
 
 [node name="Obstacles" type="Node" parent="Ground"]
 
-[node name="StaticBody2D" parent="Ground/Obstacles" instance=ExtResource("2_f0y7y")]
+[node name="Dune1" parent="Ground/Obstacles" instance=ExtResource("2_f0y7y")]
 position = Vector2(242, 1)
 
-[node name="StaticBody2D2" parent="Ground" instance=ExtResource("1_qw4io")]
+[node name="Ground2" parent="Ground" instance=ExtResource("1_qw4io")]
 position = Vector2(487.23, 0)
+
+[node name="Ground3" parent="Ground" instance=ExtResource("1_qw4io")]
+position = Vector2(755, -94)
+
+[node name="Ground4" parent="Ground" instance=ExtResource("1_qw4io")]
+position = Vector2(1000, -94)
 
 [node name="AimingSystem" type="Node2D" parent="."]
 z_index = 100

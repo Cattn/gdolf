@@ -14,7 +14,7 @@ var player_balls: Array = []
 var active_index: int = 0
 
 func can_start_shot() -> bool:
-	return is_turn_ready and not is_waiting
+	return is_turn_ready and not is_waiting and _systems_ready_for_ball(ball)
 
 func notify_shot_fired() -> void:
 	is_turn_ready = false
@@ -76,5 +76,22 @@ func _set_active_player(index: int) -> void:
 			b.set_process_input(false)
 			if b.is_in_group("ball"):
 				b.remove_from_group("ball")
+
+func _systems_ready_for_ball(b: RigidBody2D) -> bool:
+	if not b:
+		return false
+	var root := get_tree().current_scene
+	if not root:
+		return true
+	var stack: Array = [root]
+	while stack.size() > 0:
+		var n: Node = stack.pop_back()
+		if n != self and n.has_method("is_ready_for_ball"):
+			if not n.is_ready_for_ball(b):
+				return false
+		for child in n.get_children():
+			if child is Node:
+				stack.append(child)
+	return true
 
 

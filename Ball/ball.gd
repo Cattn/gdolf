@@ -11,6 +11,9 @@ var is_charging_power: bool = false
 var power_start_time: float = 0.0
 var current_power_level: float = 0.0
 
+func _ready() -> void:
+	collision_mask |= collision_layer
+
 func _process(_delta):
 	if is_charging_power:
 		var hold_duration = (Time.get_ticks_msec() / 1000.0) - power_start_time
