@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://bfieqqs08ughn"]
+
+[ext_resource type="Script" uid="uid://bdw0ncg3jum3v" path="res://campaign_1/scripts/camera.gd" id="1_dqmdp"]
+
+[node name="Camera2D" type="Camera2D"]
+script = ExtResource("1_dqmdp")
+x_offset = 1.0

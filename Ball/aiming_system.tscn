@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://brthg48kxmly1"]
+
+[ext_resource type="Script" uid="uid://bag5yyon0mq8u" path="res://raycast.gd" id="1_txnj0"]
+
+[node name="AimingSystem" type="Node2D"]
+z_index = 100
+z_as_relative = false
+script = ExtResource("1_txnj0")
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+position = Vector2(58, 456)
+scale = Vector2(0.212891, 0.212891)
+target_position = Vector2(0, 0)

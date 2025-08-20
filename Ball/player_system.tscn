@@ -1,0 +1,18 @@
+[gd_scene load_steps=5 format=3 uid="uid://cre8v5pcm4tp4"]
+
+[ext_resource type="PackedScene" uid="uid://bxc4bcl7tgh8w" path="res://Ball/ball.tscn" id="1_kiteu"]
+[ext_resource type="PackedScene" uid="uid://bp14glxob57hv" path="res://Ball/turn.tscn" id="2_u6t1g"]
+[ext_resource type="PackedScene" uid="uid://brthg48kxmly1" path="res://Ball/aiming_system.tscn" id="3_0x6nu"]
+[ext_resource type="PackedScene" uid="uid://bfieqqs08ughn" path="res://Ball/camera.tscn" id="4_44o1j"]
+
+[node name="PlayerSystem" type="Node"]
+
+[node name="Ball" parent="." instance=ExtResource("1_kiteu")]
+position = Vector2(58, 456)
+
+[node name="Turn" parent="." instance=ExtResource("2_u6t1g")]
+
+[node name="AimingSystem" parent="." instance=ExtResource("3_0x6nu")]
+
+[node name="Camera" parent="." instance=ExtResource("4_44o1j")]
+position = Vector2(578, 325)

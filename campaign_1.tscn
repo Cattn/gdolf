@@ -1,21 +1,10 @@
-[gd_scene load_steps=12 format=3 uid="uid://d1smqwcshn4s7"]
+[gd_scene load_steps=6 format=3 uid="uid://d1smqwcshn4s7"]
 
-[ext_resource type="Script" uid="uid://bag5yyon0mq8u" path="res://raycast.gd" id="1_jk177"]
 [ext_resource type="PackedScene" uid="uid://bdtup3jb8ptlk" path="res://components/ground.tscn" id="1_qw4io"]
 [ext_resource type="PackedScene" uid="uid://bmb5j1b7e0pmo" path="res://components/dune.tscn" id="2_f0y7y"]
-[ext_resource type="Script" uid="uid://cehht8cqe2uwy" path="res://Ball/ball.gd" id="2_qw4io"]
-[ext_resource type="Script" uid="uid://bdw0ncg3jum3v" path="res://campaign_1/scripts/camera.gd" id="3_cam"]
-[ext_resource type="Script" uid="uid://0tkk1mhnk2vw" path="res://env/deathb.gd" id="4_death"]
-[ext_resource type="Script" uid="uid://d2pmrfwp7lvpn" path="res://Ball/turn.gd" id="5_turn"]
-[ext_resource type="Texture2D" uid="uid://c3vs36olkmq5l" path="res://Ball/Ball1.png" id="8_v0q36"]
+[ext_resource type="PackedScene" uid="uid://b2hx51nq3iaxk" path="res://env/barrier.tscn" id="3_v0q36"]
+[ext_resource type="PackedScene" uid="uid://cre8v5pcm4tp4" path="res://Ball/player_system.tscn" id="5_rr6p6"]
 [ext_resource type="PackedScene" uid="uid://bjsoao2gcvo8h" path="res://components/wall.tscn" id="9_g5b87"]
-
-[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_28yxm"]
-friction = 0.75
-bounce = 0.24
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_qw4io"]
-radius = 29.069
 
 [node name="campaign_1" type="Node2D"]
 
@@ -49,48 +38,8 @@ position = Vector2(975, -384)
 [node name="Ground7" parent="Ground" instance=ExtResource("1_qw4io")]
 position = Vector2(730, -384)
 
-[node name="AimingSystem" type="Node2D" parent="."]
-z_index = 100
-z_as_relative = false
-script = ExtResource("1_jk177")
-
-[node name="RayCast2D" type="RayCast2D" parent="AimingSystem"]
-position = Vector2(58, 456)
-scale = Vector2(0.212891, 0.212891)
-target_position = Vector2(0, 0)
-
-[node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(578, 325)
-script = ExtResource("3_cam")
-x_offset = 1.0
-
-[node name="Barrier" type="Node2D" parent="."]
+[node name="Barrier" parent="." instance=ExtResource("3_v0q36")]
 position = Vector2(367, 649)
-
-[node name="DeathBarrier" type="Node2D" parent="Barrier"]
-script = ExtResource("4_death")
-
-[node name="Turn" type="Node" parent="."]
-script = ExtResource("5_turn")
-
-[node name="RigidBody2D" type="RigidBody2D" parent="."]
-position = Vector2(58, 456)
-collision_mask = 6
-mass = 3.178
-physics_material_override = SubResource("PhysicsMaterial_28yxm")
-gravity_scale = 1.33
-script = ExtResource("2_qw4io")
-
-[node name="Sprite2D" type="Sprite2D" parent="RigidBody2D"]
-z_index = 10
-z_as_relative = false
-position = Vector2(1.79185e-05, 0)
-scale = Vector2(0.212891, 0.212891)
-texture = ExtResource("8_v0q36")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D"]
-position = Vector2(1.79185e-05, 0)
-shape = SubResource("CircleShape2D_qw4io")
 
 [node name="Wall" type="Node" parent="."]
 
@@ -117,3 +66,5 @@ position = Vector2(0, -629)
 
 [node name="Wall8" parent="Wall" instance=ExtResource("9_g5b87")]
 position = Vector2(0, -733)
+
+[node name="PlayerSystem" parent="." instance=ExtResource("5_rr6p6")]

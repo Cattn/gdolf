@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://b2hx51nq3iaxk"]
+
+[ext_resource type="Script" uid="uid://0tkk1mhnk2vw" path="res://env/deathb.gd" id="1_42ynt"]
+
+[node name="Barrier" type="Node2D"]
+
+[node name="DeathBarrier" type="Node2D" parent="."]
+script = ExtResource("1_42ynt")
