@@ -41,6 +41,8 @@ func _draw():
 	if direction_vector.length() > 0:
 		var dir = direction_vector.normalized()
 		end_point = dir * line_length  
+		
+		draw_power_bar()
 	else:
 		end_point = Vector2.DOWN * line_length
 
@@ -49,6 +51,38 @@ func _draw():
 	if ray and ray.is_colliding():
 		var collision_point = ray.get_collision_point()
 		draw_circle(to_local(collision_point), 5, Color.YELLOW)
+
+func draw_power_bar():
+	if not ball or not ball.has_method("get_current_power"):
+		return
+		
+	var power_level = ball.get_current_power()
+	if power_level <= 0:
+		return
+	
+	# Power bar properties
+	var max_bar_length = 60.0
+	var cursor_offset = Vector2(30.0, 0.0)  # Fixed offset to the right of cursor
+	var bar_thickness = 4.0
+	
+	# Get cursor position relative to ball
+	var mouse_pos = get_global_mouse_position()
+	var cursor_local = to_local(mouse_pos)
+	
+	# Position bar to the right of cursor
+	var bar_start = cursor_local + cursor_offset
+	var bar_length = power_level * max_bar_length
+	var bar_end = bar_start + Vector2(0.0, bar_length)  # Vertical bar
+	
+	# Color changes from green to red based on power
+	var power_color = Color.GREEN.lerp(Color.RED, power_level)
+	
+	# Draw the power bar
+	draw_line(bar_start, bar_end, power_color, bar_thickness)
+	
+	# Draw a background line to show max power
+	var max_end = bar_start + Vector2(0.0, max_bar_length)
+	draw_line(bar_start, max_end, Color.GRAY, 2.0)
 
 func get_aim_direction() -> Vector2:
 	var mouse_pos = get_global_mouse_position()

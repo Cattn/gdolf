@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cfvpqg4rfxf3t"
-path="res://.godot/imported/grass.png-ec08592145b4f5705f3936a80d9185fe.ctex"
+uid="uid://bi4gekfrbnpgv"
+path="res://.godot/imported/Dune2.png-7343411671864165e68364c8d8a86539.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://env/grass.png"
-dest_files=["res://.godot/imported/grass.png-ec08592145b4f5705f3936a80d9185fe.ctex"]
+source_file="res://env/Dune2.png"
+dest_files=["res://.godot/imported/Dune2.png-7343411671864165e68364c8d8a86539.ctex"]
 
 [params]
 
