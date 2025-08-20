@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="gdolf"
-run/main_scene="uid://d1smqwcshn4s7"
+run/main_scene="uid://wol0a50g3dir"
 config/features=PackedStringArray("4.4", "GL Compatibility")
 config/icon="res://icon.svg"
 
@@ -27,6 +27,10 @@ version_control/autoload_on_startup=true
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/godot_super-wakatime/plugin.cfg")
+
+[autoload]
+
+PlayerManager="*res://GameManager/PlayerManager.gd"
 
 [layer_names]
 

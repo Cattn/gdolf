@@ -1,15 +1,22 @@
 extends Node2D
+const Find = preload("res://utilscripts/find.gd")
 
 @export var margin: float = 0.0
 
-@onready var ball: RigidBody2D = _find_ball()
-var spawn_position: Vector2 = Vector2.ZERO
+@onready var ball: RigidBody2D = null
+var spawn_positions := {}
 
 func _ready() -> void:
-	if ball:
-		spawn_position = ball.global_position
+	pass
+
 
 func _process(_delta: float) -> void:
+	var current := Find.find_ball(self)
+	if current:
+		var id := current.get_instance_id()
+		if not spawn_positions.has(id):
+			spawn_positions[id] = current.global_position
+	ball = current
 	if not ball:
 		return
 	var barrier_y := (get_parent() as Node2D).global_position.y if get_parent() and get_parent() is Node2D else global_position.y
@@ -17,16 +24,12 @@ func _process(_delta: float) -> void:
 		_reset_ball()
 
 func _reset_ball() -> void:
+	var id := ball.get_instance_id()
+	var spawn: Vector2 = spawn_positions.get(id, Vector2.ZERO)
 	ball.linear_velocity = Vector2.ZERO
 	ball.angular_velocity = 0.0
-	ball.global_position = spawn_position
+	if spawn_positions.has(id):
+		ball.global_position = spawn
 	ball.sleeping = false
 
-func _find_ball() -> RigidBody2D:
-	var scene_root = get_tree().current_scene
-	if not scene_root:
-		return null
-	for child in scene_root.get_children():
-		if child is RigidBody2D:
-			return child
-	return null
+

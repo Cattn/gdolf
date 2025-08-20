@@ -1,7 +1,8 @@
 extends RigidBody2D
+const Find = preload("res://utilscripts/find.gd")
 
-@onready var aiming_system = get_parent().get_node("AimingSystem")  # Reference to separate aiming node
-@onready var turn_manager: Node = _find_turn_manager()
+@onready var aiming_system = Find.find_aiming_system(self)  # Reference to separate aiming node
+@onready var turn_manager: Node = Find.find_turn_manager(self)
 @export var max_hit_power: float = 2000.0
 @export var min_hit_power: float = 200.0
 @export var power_charge_time: float = 1.0 
@@ -45,11 +46,3 @@ func _input(event):
 					hit_ball()
 					is_charging_power = false
 
-func _find_turn_manager() -> Node:
-	var scene_root = get_tree().current_scene
-	if not scene_root:
-		return null
-	for child in scene_root.get_children():
-		if child.name == "Turn" or child.has_method("can_start_shot"):
-			return child
-	return null

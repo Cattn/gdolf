@@ -1,23 +1,22 @@
 extends Node2D
+const Find = preload("res://utilscripts/find.gd")
 
 @onready var ray = $RayCast2D
-@onready var ball = get_parent().get_node("RigidBody2D")  # Reference to ball
+@onready var ball = Find.find_ball(self)  # Reference to ball
 
 func _ready():
 	if not ball:
-		# Try to find RigidBody2D in the scene
-		var scene_root = get_tree().current_scene
-		for child in scene_root.get_children():
-			if child is RigidBody2D:
-				ball = child
-				break
+		ball = Find.find_ball(self)
 
 @export var line_length: float = 150.0
 
 
 
 func _process(_delta):
-	if not ray or not ball:
+	if not ray:
+		return
+	ball = Find.find_ball(self)
+	if not ball:
 		return
 	
 	global_position = ball.global_position
@@ -32,6 +31,8 @@ func _process(_delta):
 		ray.target_position = Vector2.DOWN * line_length
 	
 	queue_redraw()
+
+
 
 func _draw():
 	var mouse_pos = get_global_mouse_position()

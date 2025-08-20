@@ -62,9 +62,6 @@ mass = 2.39
 physics_material_override = SubResource("PhysicsMaterial_28yxm")
 gravity_scale = 1.33
 script = ExtResource("2_qw4io")
-max_hit_power = null
-min_hit_power = null
-power_charge_time = null
 
 [node name="Sprite2D" type="Sprite2D" parent="RigidBody2D"]
 z_index = 10

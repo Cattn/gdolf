@@ -1,0 +1,9 @@
+{
+	"players": 2,
+	"levels": [
+		{
+			"name": "Campaign 1: The Hike",
+			"path": "res://campaign_1/campaign_1.tscn"
+		}
+	]
+}
