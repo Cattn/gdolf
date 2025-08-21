@@ -1,3 +1,67 @@
-[gd_scene format=3 uid="uid://o4fev8722xoi"]
+[gd_scene load_steps=6 format=3 uid="uid://o4fev8722xoi"]
+
+[ext_resource type="PackedScene" uid="uid://bdtup3jb8ptlk" path="res://env/components/ground.tscn" id="1_y7ogw"]
+[ext_resource type="PackedScene" uid="uid://cre8v5pcm4tp4" path="res://Ball/player_system.tscn" id="2_gftfg"]
+[ext_resource type="PackedScene" uid="uid://bmb5j1b7e0pmo" path="res://env/components/dune.tscn" id="2_xe4in"]
+[ext_resource type="PackedScene" uid="uid://b2hx51nq3iaxk" path="res://env/barrier.tscn" id="4_48tlg"]
+[ext_resource type="PackedScene" uid="uid://bjsoao2gcvo8h" path="res://env/components/wall.tscn" id="5_bk258"]
 
 [node name="VsMap1" type="Node2D"]
+
+[node name="Ground" type="Node" parent="."]
+
+[node name="Ground1" parent="Ground" instance=ExtResource("1_y7ogw")]
+
+[node name="Ground2" parent="Ground" instance=ExtResource("1_y7ogw")]
+position = Vector2(245, 0)
+
+[node name="Ground3" parent="Ground" instance=ExtResource("1_y7ogw")]
+position = Vector2(490, 0)
+
+[node name="Ground4" parent="Ground" instance=ExtResource("1_y7ogw")]
+position = Vector2(490, -158)
+
+[node name="Ground5" parent="Ground" instance=ExtResource("1_y7ogw")]
+position = Vector2(490, -79)
+
+[node name="Ground7" parent="Ground" instance=ExtResource("1_y7ogw")]
+position = Vector2(980, -158)
+
+[node name="Obstacles" type="Node" parent="Ground"]
+
+[node name="Dune1" parent="Ground/Obstacles" instance=ExtResource("2_xe4in")]
+position = Vector2(735, -158)
+
+[node name="Ground6" parent="Ground" instance=ExtResource("1_y7ogw")]
+position = Vector2(-243, 0)
+
+[node name="PlayerSystem" parent="." instance=ExtResource("2_gftfg")]
+
+[node name="Barrier" parent="." instance=ExtResource("4_48tlg")]
+position = Vector2(88, 649)
+
+[node name="Wall" type="Node" parent="."]
+
+[node name="Wall1" parent="Wall" instance=ExtResource("5_bk258")]
+position = Vector2(-243, 0)
+
+[node name="Wall2" parent="Wall" instance=ExtResource("5_bk258")]
+position = Vector2(-243, -104)
+
+[node name="Wall3" parent="Wall" instance=ExtResource("5_bk258")]
+position = Vector2(-243, -210)
+
+[node name="Wall4" parent="Wall" instance=ExtResource("5_bk258")]
+position = Vector2(-243, -314)
+
+[node name="Wall5" parent="Wall" instance=ExtResource("5_bk258")]
+position = Vector2(-243, -420)
+
+[node name="Wall6" parent="Wall" instance=ExtResource("5_bk258")]
+position = Vector2(-243, -524)
+
+[node name="Wall7" parent="Wall" instance=ExtResource("5_bk258")]
+position = Vector2(-243, -630)
+
+[node name="Wall8" parent="Wall" instance=ExtResource("5_bk258")]
+position = Vector2(-243, -734)

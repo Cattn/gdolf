@@ -1,0 +1,90 @@
+[gd_scene load_steps=7 format=3 uid="uid://xanm2rxxy0ss"]
+
+[ext_resource type="Texture2D" uid="uid://nwdgvktf05hh" path="res://versus/media/Screenshot 2025-08-20 175801.png" id="1_aamkr"]
+[ext_resource type="FontFile" uid="uid://c6y6m0xd87lcd" path="res://fonts/RobotoFlex-VariableFont_GRAD,XOPQ,XTRA,YOPQ,YTAS,YTDE,YTFI,YTLC,YTUC,opsz,slnt,wdth,wght.ttf" id="1_v8err"]
+[ext_resource type="Script" uid="uid://doqpjubbd7vdt" path="res://scripts/rainbow_outline.gd" id="2_aamkr"]
+[ext_resource type="Script" uid="uid://bnotfwtpj32jv" path="res://versus/map_select.gd" id="3_script"]
+
+[sub_resource type="Theme" id="Theme_ysk6b"]
+
+[sub_resource type="FontVariation" id="FontVariation_b34rh"]
+base_font = ExtResource("1_v8err")
+variation_opentype = {
+1196572996: 0,
+1481592913: 175,
+1481921089: 468,
+1498370129: 64,
+1498693971: 750,
+1498694725: -203,
+1498695241: 738,
+1498696771: 514,
+1498699075: 712,
+1869640570: 67,
+1936486004: 0,
+2003072104: 100,
+2003265652: 700
+}
+
+[node name="MapSelect" type="Node2D"]
+script = ExtResource("3_script")
+
+[node name="Background" type="ColorRect" parent="."]
+offset_right = 1153.0
+offset_bottom = 648.0
+color = Color(0.358496, 0.608422, 0.344052, 1)
+
+[node name="Level1" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 61.0
+offset_top = 741.0
+offset_right = 674.0
+offset_bottom = 741.0
+
+[node name="TextureRect" type="TextureRect" parent="Level1"]
+layout_mode = 2
+offset_top = -575.0
+offset_right = 1143.0
+offset_bottom = 65.0
+scale = Vector2(0.298176, 0.298176)
+texture = ExtResource("1_aamkr")
+
+[node name="Button" type="Button" parent="Level1"]
+layout_mode = 0
+offset_left = 63.0
+offset_top = -371.0
+offset_right = 274.0
+offset_bottom = -340.0
+text = "Level 1: Quick Climb"
+
+[node name="Title Container" type="VBoxContainer" parent="."]
+offset_left = 266.0
+offset_top = 28.0
+offset_right = 879.0
+offset_bottom = 166.0
+alignment = 1
+
+[node name="Label" type="Label" parent="Title Container"]
+layout_mode = 2
+theme = SubResource("Theme_ysk6b")
+theme_type_variation = &"HeaderLarge"
+theme_override_colors/font_color = Color(0.195378, 0.518379, 0.623505, 1)
+theme_override_colors/font_outline_color = Color(0.862676, 0.414813, 0.137925, 1)
+theme_override_constants/outline_size = 13
+theme_override_fonts/font = SubResource("FontVariation_b34rh")
+theme_override_font_sizes/font_size = 100
+text = "Map Select"
+script = ExtResource("2_aamkr")
+
+[node name="Label" type="Label" parent="Title Container/Label"]
+layout_mode = 0
+offset_left = 123.0
+offset_top = 567.0
+offset_right = 736.0
+offset_bottom = 685.0
+theme = SubResource("Theme_ysk6b")
+theme_type_variation = &"HeaderLarge"
+theme_override_constants/outline_size = 13
+theme_override_fonts/font = SubResource("FontVariation_b34rh")
+theme_override_font_sizes/font_size = 30
+text = "More Levels Coming!"

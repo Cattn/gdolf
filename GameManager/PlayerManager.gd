@@ -89,7 +89,7 @@ func _try_setup_for_current_scene() -> void:
 			var clone: RigidBody2D = any_ball.duplicate()
 			clone.name = any_ball.name + "_P" + str(existing_balls.size() + 1)
 			parent.add_child(clone)
-			clone.global_position = any_ball.global_position + Vector2(50 * (existing_balls.size()), 0)
+			clone.global_position = any_ball.global_position + Vector2(-100 * (existing_balls.size()), 0)
 			existing_balls.append(clone)
 
 	# Assign per-player textures up to 4 players

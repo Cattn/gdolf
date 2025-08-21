@@ -3,12 +3,15 @@ extends Node
 @onready var btn_start_solo: Button = $"UI/Buttons/StartSolo"
 @onready var btn_start_coop: Button = $"UI/Buttons/StartSolo2"
 @onready var opt_coop_players: OptionButton = $"UI/Buttons/StartCoop"
+@onready var btn_start_vs: Button = $"UI/Buttons/StartVS"
 
 func _ready() -> void:
 	if btn_start_solo:
 		btn_start_solo.pressed.connect(_on_start_solo_pressed)
 	if btn_start_coop:
 		btn_start_coop.pressed.connect(_on_start_coop_pressed)
+	if btn_start_vs:
+		btn_start_vs.pressed.connect(_on_start_vs_pressed)
 
 func _on_start_solo_pressed() -> void:
 	_save_players_to_user_data(1)
@@ -20,6 +23,9 @@ func _on_start_coop_pressed() -> void:
 	_save_players_to_user_data(count)
 	PlayerManager.number_of_players = count
 	get_tree().change_scene_to_file("res://campaign_1.tscn")
+
+func _on_start_vs_pressed() -> void:
+	get_tree().change_scene_to_file("res://versus/map_select.tscn")
 
 func _get_coop_players_count() -> int:
 	var idx := 0

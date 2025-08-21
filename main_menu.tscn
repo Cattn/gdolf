@@ -1,8 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://wol0a50g3dir"]
+[gd_scene load_steps=10 format=3 uid="uid://wol0a50g3dir"]
 
 [ext_resource type="FontFile" uid="uid://c6y6m0xd87lcd" path="res://fonts/RobotoFlex-VariableFont_GRAD,XOPQ,XTRA,YOPQ,YTAS,YTDE,YTFI,YTLC,YTUC,opsz,slnt,wdth,wght.ttf" id="1_06t4h"]
 [ext_resource type="Script" uid="uid://doqpjubbd7vdt" path="res://scripts/rainbow_outline.gd" id="2_dv7s2"]
 [ext_resource type="Texture2D" uid="uid://c3vs36olkmq5l" path="res://Ball/Ball1.png" id="3_fu7sn"]
+[ext_resource type="Theme" uid="uid://g8cih0hddfjk" path="res://main_button.tres" id="4_glbon"]
 [ext_resource type="Script" uid="uid://bm8lsratm5y82" path="res://scripts/menu.gd" id="4_menu"]
 
 [sub_resource type="Theme" id="Theme_7vrkn"]
@@ -45,7 +46,7 @@ offset_bottom = 648.0
 layout_mode = 0
 offset_right = 1153.0
 offset_bottom = 648.0
-color = Color(0.358496, 0.608422, 0.344052, 1)
+color = Color(0.368627, 0.615686, 0.415686, 1)
 
 [node name="Title Container" type="VBoxContainer" parent="UI"]
 layout_mode = 0
@@ -59,8 +60,8 @@ alignment = 1
 layout_mode = 2
 theme = SubResource("Theme_7vrkn")
 theme_type_variation = &"HeaderLarge"
-theme_override_colors/font_color = Color(0.195378, 0.518379, 0.623505, 1)
-theme_override_colors/font_outline_color = Color(0.862676, 0.414813, 0.137925, 1)
+theme_override_colors/font_color = Color(0.396078, 0.478431, 0.521569, 1)
+theme_override_colors/font_outline_color = Color(0.827451, 0.74902, 0.466667, 1)
 theme_override_constants/outline_size = 13
 theme_override_fonts/font = SubResource("FontVariation_jix8l")
 theme_override_font_sizes/font_size = 100
@@ -77,20 +78,17 @@ alignment = 1
 
 [node name="StartSolo" type="Button" parent="UI/Buttons"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("1_06t4h")
-theme_override_font_sizes/font_size = 24
+theme = ExtResource("4_glbon")
 text = "Start Solo Campaign"
 
 [node name="StartSolo2" type="Button" parent="UI/Buttons"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("1_06t4h")
-theme_override_font_sizes/font_size = 24
+theme = ExtResource("4_glbon")
 text = "Start Co-op Campaign"
 
 [node name="StartCoop" type="OptionButton" parent="UI/Buttons"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("1_06t4h")
-theme_override_font_sizes/font_size = 24
+theme = ExtResource("4_glbon")
 alignment = 1
 selected = 0
 item_count = 3
@@ -103,14 +101,12 @@ popup/item_2/id = 2
 
 [node name="StartVS" type="Button" parent="UI/Buttons"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("1_06t4h")
-theme_override_font_sizes/font_size = 24
+theme = ExtResource("4_glbon")
 text = "Versus Mode"
 
 [node name="Options" type="Button" parent="UI/Buttons"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("1_06t4h")
-theme_override_font_sizes/font_size = 24
+theme = ExtResource("4_glbon")
 text = "Options"
 
 [node name="StaticBody2D" type="StaticBody2D" parent="UI"]
