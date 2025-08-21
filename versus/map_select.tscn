@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://xanm2rxxy0ss"]
+[gd_scene load_steps=8 format=3 uid="uid://xanm2rxxy0ss"]
 
 [ext_resource type="Texture2D" uid="uid://nwdgvktf05hh" path="res://versus/media/Screenshot 2025-08-20 175801.png" id="1_aamkr"]
 [ext_resource type="FontFile" uid="uid://c6y6m0xd87lcd" path="res://fonts/RobotoFlex-VariableFont_GRAD,XOPQ,XTRA,YOPQ,YTAS,YTDE,YTFI,YTLC,YTUC,opsz,slnt,wdth,wght.ttf" id="1_v8err"]
 [ext_resource type="Script" uid="uid://doqpjubbd7vdt" path="res://scripts/rainbow_outline.gd" id="2_aamkr"]
 [ext_resource type="Script" uid="uid://bnotfwtpj32jv" path="res://versus/map_select.gd" id="3_script"]
+[ext_resource type="PackedScene" uid="uid://e145cwjtnams" path="res://utilscripts/pause_menu.tscn" id="5_b34rh"]
 
 [sub_resource type="Theme" id="Theme_ysk6b"]
 
@@ -88,3 +89,6 @@ theme_override_constants/outline_size = 13
 theme_override_fonts/font = SubResource("FontVariation_b34rh")
 theme_override_font_sizes/font_size = 30
 text = "More Levels Coming!"
+
+[node name="PauseMenu" parent="." instance=ExtResource("5_b34rh")]
+visible = false

@@ -1,0 +1,16 @@
+[gd_scene load_steps=2 format=3 uid="uid://c05i42gjtbcyk"]
+
+[ext_resource type="Texture2D" uid="uid://hsua7pn58jqr" path="res://env/Hole.png" id="1_ml3ek"]
+
+[node name="Hole" type="StaticBody2D"]
+
+[node name="Hole" type="Sprite2D" parent="."]
+position = Vector2(545, 346)
+texture = ExtResource("1_ml3ek")
+flip_h = true
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(634, 222, 626, 257, 598, 280, 570, 337, 489, 404, 363, 413, 364, 397, 489, 385, 561, 325, 588, 267, 623, 191, 634, 187, 635, 207)
+
+[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(711, 219, 707, 262, 658, 344, 537, 478, 463, 486, 397, 485, 364, 485, 366, 504, 392, 509, 546, 498, 659, 373, 718, 283, 729, 245, 728, 185)

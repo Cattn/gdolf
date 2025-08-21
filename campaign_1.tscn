@@ -1,9 +1,12 @@
-[gd_scene load_steps=6 format=3 uid="uid://d1smqwcshn4s7"]
+[gd_scene load_steps=9 format=3 uid="uid://d1smqwcshn4s7"]
 
 [ext_resource type="PackedScene" uid="uid://bdtup3jb8ptlk" path="res://env/components/ground.tscn" id="1_qw4io"]
 [ext_resource type="PackedScene" uid="uid://bmb5j1b7e0pmo" path="res://env/components/dune.tscn" id="2_f0y7y"]
+[ext_resource type="PackedScene" uid="uid://c05i42gjtbcyk" path="res://env/components/hole.tscn" id="3_f0y7y"]
 [ext_resource type="PackedScene" uid="uid://b2hx51nq3iaxk" path="res://env/barrier.tscn" id="3_v0q36"]
+[ext_resource type="PackedScene" uid="uid://bufpa0aogppfl" path="res://env/components/win.tscn" id="4_v0q36"]
 [ext_resource type="PackedScene" uid="uid://cre8v5pcm4tp4" path="res://Ball/player_system.tscn" id="5_rr6p6"]
+[ext_resource type="PackedScene" uid="uid://e145cwjtnams" path="res://utilscripts/pause_menu.tscn" id="6_nbnb2"]
 [ext_resource type="PackedScene" uid="uid://bjsoao2gcvo8h" path="res://env/components/wall.tscn" id="9_g5b87"]
 
 [node name="campaign_1" type="Node2D"]
@@ -17,8 +20,8 @@
 [node name="Dune1" parent="Ground/Obstacles" instance=ExtResource("2_f0y7y")]
 position = Vector2(243, 1)
 
-[node name="Dune2" parent="Ground/Obstacles" instance=ExtResource("2_f0y7y")]
-position = Vector2(486, -383)
+[node name="Hole" parent="Ground/Obstacles" instance=ExtResource("3_f0y7y")]
+position = Vector2(-19, -180)
 
 [node name="Ground2" parent="Ground" instance=ExtResource("1_qw4io")]
 position = Vector2(487.23, 0)
@@ -30,16 +33,27 @@ position = Vector2(754, -94)
 position = Vector2(1000, -94)
 
 [node name="Ground5" parent="Ground" instance=ExtResource("1_qw4io")]
-position = Vector2(1245, -191)
+position = Vector2(1243, -158)
 
 [node name="Ground6" parent="Ground" instance=ExtResource("1_qw4io")]
-position = Vector2(975, -384)
+position = Vector2(956, -564)
 
 [node name="Ground7" parent="Ground" instance=ExtResource("1_qw4io")]
-position = Vector2(730, -384)
+position = Vector2(711, -564)
 
 [node name="Ground8" parent="Ground" instance=ExtResource("1_qw4io")]
 position = Vector2(-246, 0)
+
+[node name="Ground9" parent="Ground" instance=ExtResource("1_qw4io")]
+position = Vector2(361, -564)
+
+[node name="Ground10" parent="Ground" instance=ExtResource("1_qw4io")]
+position = Vector2(1243, -234)
+
+[node name="Ground11" parent="Ground" instance=ExtResource("1_qw4io")]
+position = Vector2(1243, -313)
+
+[node name="Win" parent="Ground" instance=ExtResource("4_v0q36")]
 
 [node name="Barrier" parent="." instance=ExtResource("3_v0q36")]
 position = Vector2(367, 649)
@@ -70,4 +84,31 @@ position = Vector2(-247, -629)
 [node name="Wall8" parent="Wall" instance=ExtResource("9_g5b87")]
 position = Vector2(-247, -733)
 
+[node name="Wall9" parent="Wall" instance=ExtResource("9_g5b87")]
+position = Vector2(1549, 1)
+
+[node name="Wall10" parent="Wall" instance=ExtResource("9_g5b87")]
+position = Vector2(1549, -103)
+
+[node name="Wall11" parent="Wall" instance=ExtResource("9_g5b87")]
+position = Vector2(1549, -209)
+
+[node name="Wall12" parent="Wall" instance=ExtResource("9_g5b87")]
+position = Vector2(1549, -313)
+
+[node name="Wall13" parent="Wall" instance=ExtResource("9_g5b87")]
+position = Vector2(1549, -419)
+
+[node name="Wall14" parent="Wall" instance=ExtResource("9_g5b87")]
+position = Vector2(1549, -523)
+
+[node name="Wall15" parent="Wall" instance=ExtResource("9_g5b87")]
+position = Vector2(1549, -629)
+
+[node name="Wall16" parent="Wall" instance=ExtResource("9_g5b87")]
+position = Vector2(1549, -733)
+
 [node name="PlayerSystem" parent="." instance=ExtResource("5_rr6p6")]
+
+[node name="PauseMenu" parent="." instance=ExtResource("6_nbnb2")]
+visible = false

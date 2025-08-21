@@ -1,0 +1,32 @@
+[gd_scene load_steps=5 format=3 uid="uid://bufpa0aogppfl"]
+
+[ext_resource type="Texture2D" uid="uid://ta1hm0rkm2s4" path="res://env/Win.png" id="1_vdlrg"]
+[ext_resource type="Script" uid="uid://cm6j2wxawqybw" path="res://scripts/win.gd" id="2_jtdqm"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7e33c"]
+size = Vector2(244.5, 53.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vdlrg"]
+size = Vector2(66, 13.5)
+
+[node name="Win" type="StaticBody2D"]
+script = ExtResource("2_jtdqm")
+
+[node name="Grass(1)" type="Sprite2D" parent="."]
+position = Vector2(239, -12)
+scale = Vector2(1.0082, 1)
+texture = ExtResource("1_vdlrg")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(239, 57.75)
+shape = SubResource("RectangleShape2D_7e33c")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(117, 4, 117, 31, 361, 30, 361, 4, 208, 4, 196, 24, 176, 29, 162, 29, 148, 23, 142, 16, 139, 4)
+
+[node name="WinDetection" type="Area2D" parent="."]
+position = Vector2(173, 23)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WinDetection"]
+position = Vector2(0, -0.25)
+shape = SubResource("RectangleShape2D_vdlrg")

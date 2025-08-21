@@ -18,5 +18,15 @@
     },
     "options": {
         "players": 1
+    },
+    "levels": {
+        "level_1": {
+            "completed": false,
+            "strokes": 0
+        },
+        "level_2": {
+            "completed": false,
+            "strokes": 0
+        }
     }
 }
