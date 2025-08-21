@@ -1,8 +1,9 @@
 {
-	"levels": [
+	"campaign_levels": [
 		{
 			"name": "Campaign 1: The Hike",
-			"path": "res://campaign_1/campaign_1.tscn"
+			"path": "res://campaign_1/campaign_1.tscn",
+			"id": 1
 		}
 	]
 }
