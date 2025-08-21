@@ -3,6 +3,7 @@ const Find = preload("res://utilscripts/find.gd")
 
 @onready var aiming_system = Find.find_aiming_system(self)  # Reference to separate aiming node
 @onready var turn_manager: Node = Find.find_turn_manager(self)
+@onready var _hit_sfx: AudioStreamPlayer2D = null
 @export var max_hit_power: float = 3000.0
 @export var min_hit_power: float = 600.0
 @export var power_charge_time: float = 1.0 
@@ -13,6 +14,14 @@ var current_power_level: float = 0.0
 
 func _ready() -> void:
 	collision_mask |= collision_layer
+	var existing: AudioStreamPlayer2D = get_node_or_null("HitSfx")
+	if existing:
+		_hit_sfx = existing
+	else:
+		_hit_sfx = AudioStreamPlayer2D.new()
+		_hit_sfx.name = "HitSfx"
+		_hit_sfx.stream = load("res://Ball/hit.wav")
+		add_child(_hit_sfx)
 
 func _process(_delta):
 	if is_charging_power:
@@ -34,6 +43,8 @@ func hit_ball():
 		var power = lerp(min_hit_power, max_hit_power, current_power_level)
 		var impulse = hit_direction * power
 		apply_central_impulse(impulse)
+		if _hit_sfx:
+			_hit_sfx.play()
 		if turn_manager and turn_manager.has_method("notify_shot_fired"):
 			turn_manager.notify_shot_fired()
 
