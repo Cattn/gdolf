@@ -29,6 +29,12 @@ func _physics_process(delta: float) -> void:
 	var prev_count := player_balls.size()
 	_collect_player_balls()
 	if player_balls.size() != prev_count:
+		if player_balls.is_empty():
+			return
+		if is_waiting:
+			is_waiting = false
+			is_turn_ready = true
+		active_index = active_index % player_balls.size()
 		_set_active_player(active_index)
 	if not is_waiting:
 		return
@@ -36,6 +42,9 @@ func _physics_process(delta: float) -> void:
 		ball = Find.find_ball(self)
 		if not ball:
 			return
+	if player_balls.find(ball) == -1:
+		_start_next_turn()
+		return
 	var lin: float = ball.linear_velocity.length()
 	var ang: float = abs(ball.angular_velocity)
 	var stopped: bool = (lin <= stop_linear_speed and ang <= stop_angular_speed) or ball.sleeping

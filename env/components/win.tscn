@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://bufpa0aogppfl"]
+[gd_scene load_steps=6 format=3 uid="uid://bufpa0aogppfl"]
 
 [ext_resource type="Texture2D" uid="uid://ta1hm0rkm2s4" path="res://env/Win.png" id="1_vdlrg"]
 [ext_resource type="Script" uid="uid://cm6j2wxawqybw" path="res://scripts/win.gd" id="2_jtdqm"]
+[ext_resource type="AudioStream" uid="uid://b0rh6sppyycgs" path="res://Ball/win.wav" id="3_win"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7e33c"]
 size = Vector2(244.5, 53.5)
@@ -30,3 +31,6 @@ position = Vector2(173, 23)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="WinDetection"]
 position = Vector2(0, -0.25)
 shape = SubResource("RectangleShape2D_vdlrg")
+
+[node name="Sfx" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_win")
