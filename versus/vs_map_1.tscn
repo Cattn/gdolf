@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://o4fev8722xoi"]
+[gd_scene load_steps=7 format=3 uid="uid://o4fev8722xoi"]
 
 [ext_resource type="PackedScene" uid="uid://bdtup3jb8ptlk" path="res://env/components/ground.tscn" id="1_y7ogw"]
 [ext_resource type="PackedScene" uid="uid://cre8v5pcm4tp4" path="res://Ball/player_system.tscn" id="2_gftfg"]
 [ext_resource type="PackedScene" uid="uid://bmb5j1b7e0pmo" path="res://env/components/dune.tscn" id="2_xe4in"]
 [ext_resource type="PackedScene" uid="uid://b2hx51nq3iaxk" path="res://env/barrier.tscn" id="4_48tlg"]
 [ext_resource type="PackedScene" uid="uid://bjsoao2gcvo8h" path="res://env/components/wall.tscn" id="5_bk258"]
+[ext_resource type="PackedScene" uid="uid://e145cwjtnams" path="res://utilscripts/pause_menu.tscn" id="6_r8nwn"]
 
 [node name="VsMap1" type="Node2D"]
 
@@ -65,3 +66,6 @@ position = Vector2(-243, -630)
 
 [node name="Wall8" parent="Wall" instance=ExtResource("5_bk258")]
 position = Vector2(-243, -734)
+
+[node name="PauseMenu" parent="." instance=ExtResource("6_r8nwn")]
+visible = false
