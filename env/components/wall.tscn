@@ -1,6 +1,10 @@
-[gd_scene load_steps=3 format=3 uid="uid://bjsoao2gcvo8h"]
+[gd_scene load_steps=4 format=3 uid="uid://bjsoao2gcvo8h"]
 
 [ext_resource type="Texture2D" uid="uid://drs2rqmjxytor" path="res://env/Wall.png" id="1_mklqt"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_wall"]
+friction = 0.3
+bounce = 0.8
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_28yxm"]
 size = Vector2(64.25, 105.5)
@@ -8,6 +12,7 @@ size = Vector2(64.25, 105.5)
 [node name="StaticBody2D" type="StaticBody2D"]
 collision_layer = 2
 collision_mask = 0
+physics_material_override = SubResource("PhysicsMaterial_wall")
 
 [node name="Wall" type="Sprite2D" parent="."]
 position = Vector2(-32, 595)

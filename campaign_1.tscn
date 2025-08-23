@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://d1smqwcshn4s7"]
+[gd_scene load_steps=10 format=3 uid="uid://d1smqwcshn4s7"]
 
 [ext_resource type="PackedScene" uid="uid://bdtup3jb8ptlk" path="res://env/components/ground.tscn" id="1_qw4io"]
 [ext_resource type="PackedScene" uid="uid://bmb5j1b7e0pmo" path="res://env/components/dune.tscn" id="2_f0y7y"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://bufpa0aogppfl" path="res://env/components/win.tscn" id="4_v0q36"]
 [ext_resource type="PackedScene" uid="uid://cre8v5pcm4tp4" path="res://Ball/player_system.tscn" id="5_rr6p6"]
 [ext_resource type="PackedScene" uid="uid://e145cwjtnams" path="res://utilscripts/pause_menu.tscn" id="6_nbnb2"]
+[ext_resource type="PackedScene" uid="uid://diuvjo2p8wqlu" path="res://env/components/tee.tscn" id="9_4vivg"]
 [ext_resource type="PackedScene" uid="uid://bjsoao2gcvo8h" path="res://env/components/wall.tscn" id="9_g5b87"]
 
 [node name="campaign_1" type="Node2D"]
@@ -21,7 +22,7 @@
 position = Vector2(243, 1)
 
 [node name="Hole" parent="Ground/Obstacles" instance=ExtResource("3_f0y7y")]
-position = Vector2(-19, -180)
+position = Vector2(-124, -168)
 
 [node name="Ground2" parent="Ground" instance=ExtResource("1_qw4io")]
 position = Vector2(487.23, 0)
@@ -33,27 +34,40 @@ position = Vector2(754, -94)
 position = Vector2(1000, -94)
 
 [node name="Ground5" parent="Ground" instance=ExtResource("1_qw4io")]
-position = Vector2(1243, -158)
+position = Vector2(1490, -158)
 
 [node name="Ground6" parent="Ground" instance=ExtResource("1_qw4io")]
-position = Vector2(956, -564)
+position = Vector2(851, -552)
 
 [node name="Ground7" parent="Ground" instance=ExtResource("1_qw4io")]
-position = Vector2(711, -564)
+position = Vector2(606, -552)
 
 [node name="Ground8" parent="Ground" instance=ExtResource("1_qw4io")]
 position = Vector2(-246, 0)
 
 [node name="Ground9" parent="Ground" instance=ExtResource("1_qw4io")]
-position = Vector2(361, -564)
+position = Vector2(256, -552)
 
 [node name="Ground10" parent="Ground" instance=ExtResource("1_qw4io")]
-position = Vector2(1243, -234)
+position = Vector2(1490, -234)
 
 [node name="Ground11" parent="Ground" instance=ExtResource("1_qw4io")]
-position = Vector2(1243, -313)
+position = Vector2(1490, -313)
 
 [node name="Win" parent="Ground" instance=ExtResource("4_v0q36")]
+position = Vector2(-105, 12)
+
+[node name="Ground12" parent="Ground" instance=ExtResource("1_qw4io")]
+position = Vector2(1245, -94)
+
+[node name="Ground13" parent="Ground" instance=ExtResource("1_qw4io")]
+position = Vector2(1096, -552)
+
+[node name="Ground14" parent="Ground" instance=ExtResource("1_qw4io")]
+position = Vector2(1341, -552)
+
+[node name="Ground15" parent="Ground" instance=ExtResource("1_qw4io")]
+position = Vector2(1096, -286)
 
 [node name="Barrier" parent="." instance=ExtResource("3_v0q36")]
 position = Vector2(367, 649)
@@ -85,30 +99,41 @@ position = Vector2(-247, -629)
 position = Vector2(-247, -733)
 
 [node name="Wall9" parent="Wall" instance=ExtResource("9_g5b87")]
-position = Vector2(1549, 1)
+position = Vector2(1796, 1)
 
 [node name="Wall10" parent="Wall" instance=ExtResource("9_g5b87")]
-position = Vector2(1549, -103)
+position = Vector2(1796, -103)
 
 [node name="Wall11" parent="Wall" instance=ExtResource("9_g5b87")]
-position = Vector2(1549, -209)
+position = Vector2(1796, -209)
 
 [node name="Wall12" parent="Wall" instance=ExtResource("9_g5b87")]
-position = Vector2(1549, -313)
+position = Vector2(1796, -313)
 
 [node name="Wall13" parent="Wall" instance=ExtResource("9_g5b87")]
-position = Vector2(1549, -419)
+position = Vector2(1796, -419)
 
 [node name="Wall14" parent="Wall" instance=ExtResource("9_g5b87")]
-position = Vector2(1549, -523)
+position = Vector2(1796, -523)
 
 [node name="Wall15" parent="Wall" instance=ExtResource("9_g5b87")]
-position = Vector2(1549, -629)
+position = Vector2(1796, -629)
 
 [node name="Wall16" parent="Wall" instance=ExtResource("9_g5b87")]
-position = Vector2(1549, -733)
+position = Vector2(1796, -733)
+
+[node name="Wall17" parent="Wall" instance=ExtResource("9_g5b87")]
+position = Vector2(1095, -392)
+
+[node name="Wall18" parent="Wall" instance=ExtResource("9_g5b87")]
+position = Vector2(1095, -285)
 
 [node name="PlayerSystem" parent="." instance=ExtResource("5_rr6p6")]
 
 [node name="PauseMenu" parent="." instance=ExtResource("6_nbnb2")]
 visible = false
+
+[node name="Tees" type="Node" parent="."]
+
+[node name="Tee" parent="Tees" instance=ExtResource("9_4vivg")]
+position = Vector2(1218, 229)

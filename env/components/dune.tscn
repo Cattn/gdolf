@@ -1,9 +1,14 @@
-[gd_scene load_steps=3 format=3 uid="uid://bmb5j1b7e0pmo"]
+[gd_scene load_steps=4 format=3 uid="uid://bmb5j1b7e0pmo"]
 
 [ext_resource type="Texture2D" uid="uid://c7cpijrqkh2pe" path="res://env/grass (1).png" id="1_ou4wh"]
 [ext_resource type="Texture2D" uid="uid://bi4gekfrbnpgv" path="res://env/Dune2.png" id="2_s7w27"]
 
-[node name="StaticBody2D" type="StaticBody2D"]
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_ground"]
+friction = 0.9
+bounce = 0.1
+
+[node name="StaticBody2D3" type="StaticBody2D"]
+physics_material_override = SubResource("PhysicsMaterial_ground")
 
 [node name="Grass" type="Sprite2D" parent="."]
 z_as_relative = false

@@ -1,13 +1,18 @@
-[gd_scene load_steps=3 format=3 uid="uid://bdtup3jb8ptlk"]
+[gd_scene load_steps=4 format=3 uid="uid://bdtup3jb8ptlk"]
 
 [ext_resource type="Texture2D" uid="uid://c7cpijrqkh2pe" path="res://env/grass (1).png" id="1_g0euw"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_ground"]
+friction = 0.9
+bounce = 0.1
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_28yxm"]
 size = Vector2(244.5, 79)
 
-[node name="StaticBody2D" type="StaticBody2D"]
+[node name="StaticBody2D2" type="StaticBody2D"]
 collision_layer = 2
 collision_mask = 0
+physics_material_override = SubResource("PhysicsMaterial_ground")
 
 [node name="Grass(1)" type="Sprite2D" parent="."]
 position = Vector2(122, 608)

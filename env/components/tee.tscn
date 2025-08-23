@@ -1,0 +1,47 @@
+[gd_scene load_steps=5 format=3 uid="uid://diuvjo2p8wqlu"]
+
+[ext_resource type="Texture2D" uid="uid://cylhresf5e73l" path="res://Ball/Tee.png" id="1_83vq0"]
+[ext_resource type="Script" path="res://env/components/tee.gd" id="2_tee_script"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_osqks"]
+size = Vector2(35, 76)
+
+[sub_resource type="Animation" id="Animation_bob"]
+resource_name = "bob"
+length = 1.5
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -10), Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_bob"]
+_data = {
+"bob": SubResource("Animation_bob")
+}
+
+[node name="Tee" type="Area2D"]
+collision_layer = 8
+collision_mask = 1
+script = ExtResource("2_tee_script")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_83vq0")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-0.5, -1)
+shape = SubResource("RectangleShape2D_osqks")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_bob")
+}
