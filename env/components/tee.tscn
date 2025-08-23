@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://diuvjo2p8wqlu"]
+[gd_scene load_steps=7 format=3 uid="uid://diuvjo2p8wqlu"]
 
 [ext_resource type="Texture2D" uid="uid://cylhresf5e73l" path="res://Ball/Tee.png" id="1_83vq0"]
-[ext_resource type="Script" path="res://env/components/tee.gd" id="2_tee_script"]
+[ext_resource type="Material" uid="uid://bf36eogjytphr" path="res://env/scaling.tres" id="2_t7cpv"]
+[ext_resource type="Script" uid="uid://bsiw7cp3skv3h" path="res://env/components/tee.gd" id="2_tee_script"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_osqks"]
 size = Vector2(35, 76)
@@ -25,15 +26,16 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_bob"]
 _data = {
-"bob": SubResource("Animation_bob")
+&"bob": SubResource("Animation_bob")
 }
 
 [node name="Tee" type="Area2D"]
 collision_layer = 8
-collision_mask = 1
 script = ExtResource("2_tee_script")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 2
+material = ExtResource("2_t7cpv")
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("1_83vq0")
 
@@ -43,5 +45,5 @@ shape = SubResource("RectangleShape2D_osqks")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_bob")
+&"": SubResource("AnimationLibrary_bob")
 }

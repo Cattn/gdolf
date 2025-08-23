@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://bxc4bcl7tgh8w"]
+[gd_scene load_steps=6 format=3 uid="uid://bxc4bcl7tgh8w"]
 
 [ext_resource type="Script" uid="uid://cehht8cqe2uwy" path="res://Ball/ball.gd" id="1_65gad"]
+[ext_resource type="Material" uid="uid://bf36eogjytphr" path="res://env/scaling.tres" id="2_4s4qd"]
 [ext_resource type="Texture2D" uid="uid://c3vs36olkmq5l" path="res://Ball/Ball1.png" id="2_ngrkv"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_28yxm"]
@@ -20,6 +21,8 @@ script = ExtResource("1_65gad")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 z_index = 10
 z_as_relative = false
+texture_filter = 2
+material = ExtResource("2_4s4qd")
 position = Vector2(1.79185e-05, 0)
 scale = Vector2(0.212891, 0.212891)
 texture = ExtResource("2_ngrkv")
