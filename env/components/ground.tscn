@@ -3,8 +3,8 @@
 [ext_resource type="Texture2D" uid="uid://c7cpijrqkh2pe" path="res://env/grass (1).png" id="1_g0euw"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_ground"]
-friction = 0.9
-bounce = 0.1
+friction = 1.5
+bounce = 0.05
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_28yxm"]
 size = Vector2(244.5, 79)

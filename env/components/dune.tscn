@@ -4,8 +4,8 @@
 [ext_resource type="Texture2D" uid="uid://bi4gekfrbnpgv" path="res://env/Dune2.png" id="2_s7w27"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_ground"]
-friction = 0.9
-bounce = 0.1
+friction = 1.5
+bounce = 0.05
 
 [node name="StaticBody2D3" type="StaticBody2D"]
 physics_material_override = SubResource("PhysicsMaterial_ground")
