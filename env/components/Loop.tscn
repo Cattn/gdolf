@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://yrut0eovo24r"]
+
+[ext_resource type="PackedScene" uid="uid://bdtup3jb8ptlk" path="res://env/components/ground.tscn" id="1_4vwab"]
+[ext_resource type="Texture2D" uid="uid://blkgnvof3i248" path="res://env/Loop.png" id="2_0degb"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_1"]
+friction = 0.0
+
+[node name="StaticBody2D" type="StaticBody2D"]
+physics_material_override = SubResource("PhysicsMaterial_1")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_0degb")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(-221, 167, 17, 167, 42, 162, 87, 152, 125, 132, 147, 105, 166, 67, 191, -29, 178, -81, 139, -113, 96, -139, -6, -154, -122, -148, -154, -124, -173, -144, -117, -180, -1, -193, 97, -176, 147, -151, 186, -122, 209, -77, 223, -24, 221, 23, 201, 80, 181, 117, 154, 143, 108, 166, 17, 190, -221, 190)
+
+[node name="Ground10" parent="." instance=ExtResource("1_4vwab")]
+position = Vector2(-298, -598)

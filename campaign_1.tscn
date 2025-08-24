@@ -45,9 +45,6 @@ position = Vector2(606, -552)
 [node name="Ground8" parent="Ground" instance=ExtResource("1_qw4io")]
 position = Vector2(-246, 0)
 
-[node name="Ground9" parent="Ground" instance=ExtResource("1_qw4io")]
-position = Vector2(256, -552)
-
 [node name="Ground10" parent="Ground" instance=ExtResource("1_qw4io")]
 position = Vector2(1490, -234)
 
@@ -55,7 +52,7 @@ position = Vector2(1490, -234)
 position = Vector2(1490, -313)
 
 [node name="Win" parent="Ground" instance=ExtResource("4_v0q36")]
-position = Vector2(-105, 12)
+position = Vector2(-124, -343)
 
 [node name="Ground12" parent="Ground" instance=ExtResource("1_qw4io")]
 position = Vector2(1245, -94)
@@ -68,6 +65,21 @@ position = Vector2(1341, -552)
 
 [node name="Ground15" parent="Ground" instance=ExtResource("1_qw4io")]
 position = Vector2(1096, -286)
+
+[node name="Ground16" parent="Ground" instance=ExtResource("1_qw4io")]
+position = Vector2(238, -552)
+
+[node name="Ground17" parent="Ground" instance=ExtResource("1_qw4io")]
+position = Vector2(-3, -629)
+
+[node name="Ground18" parent="Ground" instance=ExtResource("1_qw4io")]
+position = Vector2(286, -733)
+
+[node name="Ground19" parent="Ground" instance=ExtResource("1_qw4io")]
+position = Vector2(531, -814)
+
+[node name="Ground20" parent="Ground" instance=ExtResource("1_qw4io")]
+position = Vector2(531, -894)
 
 [node name="Barrier" parent="." instance=ExtResource("3_v0q36")]
 position = Vector2(367, 649)
@@ -127,6 +139,21 @@ position = Vector2(1095, -392)
 
 [node name="Wall18" parent="Wall" instance=ExtResource("9_g5b87")]
 position = Vector2(1095, -285)
+
+[node name="Wall19" parent="Wall" instance=ExtResource("9_g5b87")]
+position = Vector2(0, -710)
+
+[node name="Wall23" parent="Wall" instance=ExtResource("9_g5b87")]
+position = Vector2(840, -972)
+
+[node name="Wall24" parent="Wall" instance=ExtResource("9_g5b87")]
+position = Vector2(0, -814)
+
+[node name="Wall25" parent="Wall" instance=ExtResource("9_g5b87")]
+position = Vector2(0, -920)
+
+[node name="Wall26" parent="Wall" instance=ExtResource("9_g5b87")]
+position = Vector2(0, -1026)
 
 [node name="PlayerSystem" parent="." instance=ExtResource("5_rr6p6")]
 

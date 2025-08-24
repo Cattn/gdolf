@@ -1,0 +1,14 @@
+[gd_scene load_steps=4 format=3 uid="uid://cdob427ne3ff3"]
+
+[ext_resource type="PackedScene" uid="uid://bjsoao2gcvo8h" path="res://env/components/wall.tscn" id="1_7h2ef"]
+[ext_resource type="Texture2D" uid="uid://d0krav53ws71k" path="res://env/Bouncey.png" id="2_4plwy"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_wall_bounce"]
+friction = 0.1
+bounce = 1.5
+
+[node name="StaticBody2D" instance=ExtResource("1_7h2ef")]
+physics_material_override = SubResource("PhysicsMaterial_wall_bounce")
+
+[node name="Wall" parent="." index="0"]
+texture = ExtResource("2_4plwy")

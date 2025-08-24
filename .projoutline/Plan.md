@@ -51,3 +51,9 @@ As you upgrade this skill, charging your shot will take longer, allowing for a m
 1
 
 Grants you a second hit in the same turn once per campaign.
+
+## Gameplay Progression
+
+### Loops
+
+loops will be introduced in later levels when the user likely has speed + bounce upgrades, allowing for them to complete the loop.

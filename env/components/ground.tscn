@@ -1,7 +1,6 @@
-[gd_scene load_steps=5 format=3 uid="uid://bdtup3jb8ptlk"]
+[gd_scene load_steps=4 format=3 uid="uid://bdtup3jb8ptlk"]
 
 [ext_resource type="Texture2D" uid="uid://c7cpijrqkh2pe" path="res://env/grass (1).png" id="1_g0euw"]
-[ext_resource type="Material" uid="uid://bf36eogjytphr" path="res://env/scaling.tres" id="1_v7a42"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_ground"]
 friction = 1.5
@@ -17,7 +16,6 @@ physics_material_override = SubResource("PhysicsMaterial_ground")
 
 [node name="Grass(1)" type="Sprite2D" parent="."]
 texture_filter = 2
-material = ExtResource("1_v7a42")
 position = Vector2(122, 608)
 scale = Vector2(1.0082, 1)
 texture = ExtResource("1_g0euw")
