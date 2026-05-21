@@ -3,8 +3,11 @@ extends StaticBody2D
 var _win_area: Area2D = null
 var _triggered: bool = false
 @onready var _sfx: AudioStreamPlayer2D = get_node_or_null("Sfx")
+@onready var _network_client: Node = get_node_or_null("/root/NetworkClient")
 
 func _ready() -> void:
+	if _network_client and _network_client.has_signal("match_finished") and not _network_client.match_finished.is_connected(_on_match_finished):
+		_network_client.match_finished.connect(_on_match_finished)
 	var node := get_node_or_null("WinDetection")
 	if node is Area2D:
 		_win_area = node
@@ -39,6 +42,10 @@ func _handle_win_for_body(body: RigidBody2D) -> void:
 	_triggered = true
 	if _sfx:
 		_sfx.play()
+	if _is_online_mode():
+		var player_id := str(body.get_meta("player_id", ""))
+		if _network_client and _network_client.has_method("report_win") and _network_client.report_win(player_id):
+			return
 	if PlayerManager and PlayerManager.number_of_players > 1:
 		var parent := body.get_parent()
 		var ball_script: Script = body.get_script()
@@ -68,3 +75,9 @@ func _physics_process(_delta: float) -> void:
 			if b is RigidBody2D:
 				_handle_win_for_body(b)
 				return
+
+func _is_online_mode() -> bool:
+	return _network_client and _network_client.has_method("is_online_match") and _network_client.is_online_match()
+
+func _on_match_finished(_data: Dictionary) -> void:
+	get_tree().change_scene_to_file("res://utilscripts/win_screen.tscn")

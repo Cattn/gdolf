@@ -1,9 +1,10 @@
 extends RigidBody2D
-const Find = preload("res://utilscripts/find.gd")
+const FindUtils = preload("res://utilscripts/find.gd")
 
-@onready var aiming_system = Find.find_aiming_system(self)
-@onready var turn_manager: Node = Find.find_turn_manager(self)
+@onready var aiming_system = FindUtils.find_aiming_system(self)
+@onready var turn_manager: Node = FindUtils.find_turn_manager(self)
 @onready var _hit_sfx: AudioStreamPlayer2D = null
+@onready var network_client: Node = get_node_or_null("/root/NetworkClient")
 @export var max_hit_power: float = 3000.0
 @export var min_hit_power: float = 600.0
 @export var power_charge_time: float = 1.0 
@@ -12,6 +13,7 @@ var is_charging_power: bool = false
 var power_start_time: float = 0.0
 var current_power_level: float = 0.0
 var recent_shot_frames: int = 0
+var pending_online_shot: bool = false
 
 const VELOCITY_THRESHOLD: float = 50.0
 const ANGULAR_VELOCITY_THRESHOLD: float = 0.5
@@ -27,6 +29,8 @@ func _ready() -> void:
 		_hit_sfx.name = "HitSfx"
 		_hit_sfx.stream = load("res://Ball/hit.wav")
 		add_child(_hit_sfx)
+	if network_client and network_client.has_signal("shot_applied") and not network_client.shot_applied.is_connected(_on_network_shot_applied):
+		network_client.shot_applied.connect(_on_network_shot_applied)
 
 func _process(_delta):
 	if is_charging_power:
@@ -60,6 +64,12 @@ func is_on_ground() -> bool:
 	return get_world_2d().direct_space_state.intersect_point(params).size() > 0
 
 func hit_ball():
+	if _is_online_mode():
+		_submit_online_shot()
+		return
+	_apply_local_shot(_build_shot_payload())
+
+func _build_shot_payload() -> Dictionary:
 	var hit_direction: Vector2 = Vector2.ZERO
 	if aiming_system and aiming_system.has_method("get_aim_direction"):
 		hit_direction = aiming_system.get_aim_direction()
@@ -77,13 +87,52 @@ func hit_ball():
 	var hold_duration: float = (Time.get_ticks_msec() / 1000.0) - power_start_time
 	var power_level: float = clamp(hold_duration / power_charge_time, 0.0, 1.0)
 	var power: float = lerp(min_hit_power, max_hit_power, power_level)
-	var impulse: Vector2 = hit_direction * power
+	var turn_number := 0
+	if network_client and network_client.has_method("get_turn_number"):
+		turn_number = network_client.get_turn_number()
+	return {
+		"direction": {"x": hit_direction.x, "y": hit_direction.y},
+		"power": power,
+		"timestamp": Time.get_unix_time_from_system(),
+		"turn_number": turn_number
+	}
+
+func _apply_local_shot(payload: Dictionary) -> void:
+	var direction_data = payload.get("direction", {})
+	var hit_direction := Vector2(float(direction_data.get("x", 1.0)), float(direction_data.get("y", 0.0)))
+	if hit_direction == Vector2.ZERO:
+		hit_direction = Vector2.RIGHT
+	var power := float(payload.get("power", min_hit_power))
+	var impulse: Vector2 = hit_direction.normalized() * power
 	apply_central_impulse(impulse)
 	recent_shot_frames = 12
 	if _hit_sfx:
 		_hit_sfx.play()
 	if turn_manager and turn_manager.has_method("notify_shot_fired"):
 		turn_manager.notify_shot_fired()
+
+func _submit_online_shot() -> void:
+	if pending_online_shot:
+		return
+	if not network_client or not network_client.has_method("submit_shot"):
+		return
+	var payload := _build_shot_payload()
+	if network_client.submit_shot(payload):
+		pending_online_shot = true
+
+func _on_network_shot_applied(data: Dictionary) -> void:
+	if not _is_online_mode():
+		return
+	var shot_player_id := str(data.get("player_id", ""))
+	var ball_player_id := str(get_meta("player_id", ""))
+	if not shot_player_id.is_empty() and not ball_player_id.is_empty() and shot_player_id != ball_player_id:
+		return
+	if not shot_player_id.is_empty() and ball_player_id.is_empty():
+		if not _is_active_ball():
+			return
+	_apply_local_shot(data)
+	if network_client and network_client.has_method("get_local_player_id") and shot_player_id == network_client.get_local_player_id():
+		pending_online_shot = false
 
 func _input(event):
 	if event is InputEventMouseButton:
@@ -113,3 +162,6 @@ func _is_active_ball() -> bool:
 		if child is RigidBody2D and child.get_script() == get_script():
 			count += 1
 	return count <= 1
+
+func _is_online_mode() -> bool:
+	return network_client and network_client.has_method("is_online_match") and network_client.is_online_match()

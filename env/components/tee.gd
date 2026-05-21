@@ -6,6 +6,7 @@ signal ball_entered_tee(ball: RigidBody2D)
 
 @onready var turn_manager: Node = null
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
+@onready var network_client: Node = get_node_or_null("/root/NetworkClient")
 
 func _ready() -> void:
 	body_entered.connect(_on_body_entered)
@@ -31,6 +32,9 @@ func _on_body_exited(body: Node2D) -> void:
 			print("Ball left tee!")
 
 func _handle_ball_at_tee(ball: RigidBody2D) -> void:
+	if _is_online_mode() and network_client and network_client.has_method("report_tee_event"):
+		var player_id := str(ball.get_meta("player_id", ""))
+		network_client.report_tee_event(player_id, "entered")
 	ball.linear_velocity = Vector2.ZERO
 	ball.angular_velocity = 0.0
 	
@@ -43,3 +47,6 @@ func _handle_ball_at_tee(ball: RigidBody2D) -> void:
 	
 	if turn_manager and turn_manager.has_method("notify_ball_at_tee"):
 		turn_manager.notify_ball_at_tee(ball)
+
+func _is_online_mode() -> bool:
+	return network_client and network_client.has_method("is_online_match") and network_client.is_online_match()

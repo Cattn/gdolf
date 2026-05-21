@@ -1,9 +1,10 @@
 extends Node2D
-const Find = preload("res://utilscripts/find.gd")
+const FindUtils = preload("res://utilscripts/find.gd")
 
 @export var margin: float = 0.0
 
 @onready var ball: RigidBody2D = null
+@onready var network_client: Node = get_node_or_null("/root/NetworkClient")
 var spawn_positions := {}
 
 func _ready() -> void:
@@ -11,7 +12,7 @@ func _ready() -> void:
 
 
 func _process(_delta: float) -> void:
-	var current := Find.find_ball(self)
+	var current := FindUtils.find_ball(self)
 	var balls: Array = []
 	if current:
 		var parent := current.get_parent()
@@ -36,6 +37,9 @@ func _reset_ball() -> void:
 		_reset_ball_specific(ball)
 
 func _reset_ball_specific(b: RigidBody2D) -> void:
+	if _is_online_mode() and network_client and network_client.has_method("report_out_of_bounds"):
+		var player_id := str(b.get_meta("player_id", ""))
+		network_client.report_out_of_bounds(player_id, b.global_position)
 	var id: int = b.get_instance_id()
 	var spawn: Vector2 = spawn_positions.get(id, Vector2.ZERO)
 	b.linear_velocity = Vector2.ZERO
@@ -48,5 +52,8 @@ func is_ready_for_ball(b: RigidBody2D) -> bool:
 	if not b:
 		return false
 	return spawn_positions.has(b.get_instance_id())
+
+func _is_online_mode() -> bool:
+	return network_client and network_client.has_method("is_online_match") and network_client.is_online_match()
 
 

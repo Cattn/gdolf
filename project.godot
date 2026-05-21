@@ -8,16 +8,21 @@
 
 config_version=5
 
+[animation]
+
+compatibility/default_parent_skeleton_in_mesh_instance_3d=true
+
 [application]
 
 config/name="gdolf"
 run/main_scene="uid://wol0a50g3dir"
-config/features=PackedStringArray("4.4", "GL Compatibility")
+config/features=PackedStringArray("4.6", "GL Compatibility")
 config/icon="res://icon.svg"
 
 [autoload]
 
 PlayerManager="*res://GameManager/PlayerManager.gd"
+NetworkClient="*res://Online/NetworkClient.gd"
 
 [display]
 
@@ -35,7 +40,7 @@ version_control/autoload_on_startup=true
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/PaletteTools/plugin.cfg", "res://addons/godot_super-wakatime/plugin.cfg")
+enabled=PackedStringArray("res://addons/PaletteTools/plugin.cfg")
 
 [layer_names]
 

@@ -1,5 +1,5 @@
 extends Node
-const Find = preload("res://utilscripts/find.gd")
+const FindUtils = preload("res://utilscripts/find.gd")
 
 @export var user_data_source_path: String = "res://config/userdat.json"
 const user_data_path: String = "user://userdat.json"
@@ -54,8 +54,11 @@ func _merge_defaults(user_data: Variant, defaults: Variant) -> Variant:
 	return user_data
 
 func _try_setup_for_current_scene() -> void:
+	if _is_online_mode():
+		_setup_online_players()
+		return
 	if number_of_players <= 1:
-		var any_ball_sp: RigidBody2D = Find.find_ball(self)
+		var any_ball_sp: RigidBody2D = FindUtils.find_ball(self)
 		if any_ball_sp and any_ball_sp.get_parent():
 			var duplicates: Array = []
 			for child in any_ball_sp.get_parent().get_children():
@@ -70,7 +73,7 @@ func _try_setup_for_current_scene() -> void:
 				if i > 0:
 					b.queue_free()
 		return
-	var any_ball: RigidBody2D = Find.find_ball(self)
+	var any_ball: RigidBody2D = FindUtils.find_ball(self)
 	if not any_ball:
 		return
 	var parent := any_ball.get_parent()
@@ -103,3 +106,60 @@ func _try_setup_for_current_scene() -> void:
 			var tex: Texture2D = load(tex_path)
 			if tex:
 				sprite.texture = tex
+
+func _setup_online_players() -> void:
+	var network_client := _get_network_client()
+	if not network_client:
+		return
+	var any_ball: RigidBody2D = FindUtils.find_ball(self)
+	if not any_ball:
+		return
+	var parent := any_ball.get_parent()
+	if not parent:
+		return
+	var players: Array = []
+	if network_client.has_method("get_players"):
+		players = network_client.get_players()
+	if players.is_empty():
+		var local_id := "p1"
+		if network_client.has_method("get_local_player_id"):
+			local_id = network_client.get_local_player_id()
+		players = [{"id": local_id, "name": "Player 1"}]
+	var existing_balls: Array = []
+	for child in parent.get_children():
+		if child is RigidBody2D and child.get_script() == any_ball.get_script():
+			existing_balls.append(child)
+	var target_count: int = clamp(players.size(), 1, 4)
+	number_of_players = target_count
+	var to_spawn: int = target_count - existing_balls.size()
+	if to_spawn > 0:
+		for _i in to_spawn:
+			var clone: RigidBody2D = any_ball.duplicate()
+			clone.name = any_ball.name + "_P" + str(existing_balls.size() + 1)
+			parent.add_child(clone)
+			clone.global_position = any_ball.global_position + Vector2(-100 * (existing_balls.size()), 0)
+			existing_balls.append(clone)
+	for i in existing_balls.size():
+		var b: RigidBody2D = existing_balls[i]
+		if i >= target_count:
+			b.queue_free()
+			continue
+		var p: Dictionary = players[i] if i < players.size() and players[i] is Dictionary else {}
+		var player_id := str(p.get("id", "p%s" % (i + 1)))
+		b.set_meta("player_id", player_id)
+		b.set_process_input(false)
+		if b.is_in_group("ball"):
+			b.remove_from_group("ball")
+		var sprite: Sprite2D = b.get_node_or_null("Sprite2D")
+		if sprite:
+			var tex_path := "res://Ball/Ball" + str(i + 1) + ".png"
+			var tex: Texture2D = load(tex_path)
+			if tex:
+				sprite.texture = tex
+
+func _is_online_mode() -> bool:
+	var network_client := _get_network_client()
+	return network_client and network_client.has_method("is_online_match") and network_client.is_online_match()
+
+func _get_network_client() -> Node:
+	return get_node_or_null("/root/NetworkClient")

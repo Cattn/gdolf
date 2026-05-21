@@ -1,17 +1,18 @@
 extends Node2D
-const Find = preload("res://utilscripts/find.gd")
+const FindUtils = preload("res://utilscripts/find.gd")
 
 @onready var ray = $RayCast2D
-@onready var ball = Find.find_ball(self)
-@onready var turn_manager: Node = Find.find_turn_manager(self)
+@onready var ball = FindUtils.find_ball(self)
+@onready var turn_manager: Node = FindUtils.find_turn_manager(self)
+@onready var network_client: Node = get_node_or_null("/root/NetworkClient")
 @onready var tex_yes: Texture2D = load("res://Ball/YesBall.png")
 @onready var tex_no: Texture2D = load("res://Ball/NoBall.png")
 
 func _ready():
 	if not ball:
-		ball = Find.find_ball(self)
+		ball = FindUtils.find_ball(self)
 	if not turn_manager:
-		turn_manager = Find.find_turn_manager(self)
+		turn_manager = FindUtils.find_turn_manager(self)
 
 @export var line_length: float = 150.0
 
@@ -20,9 +21,9 @@ func _ready():
 func _process(_delta):
 	if not ray:
 		return
-	ball = Find.find_ball(self)
+	ball = FindUtils.find_ball(self)
 	if not turn_manager:
-		turn_manager = Find.find_turn_manager(self)
+		turn_manager = FindUtils.find_turn_manager(self)
 	if not ball:
 		return
 	
@@ -108,8 +109,16 @@ func get_aim_direction() -> Vector2:
 func _can_shoot() -> bool:
 	if not ball:
 		return false
+	if _is_online_mode():
+		if not network_client or not network_client.has_method("is_synchronized") or not network_client.is_synchronized():
+			return false
+		if network_client.has_method("can_local_player_shoot") and not network_client.can_local_player_shoot():
+			return false
 	if turn_manager and turn_manager.has_method("can_start_shot"):
 		return turn_manager.can_start_shot()
 	var lin_ok: bool = ball.linear_velocity.length() <= 0.1
 	var ang_ok: bool = abs(ball.angular_velocity) <= 0.1
 	return lin_ok and ang_ok
+
+func _is_online_mode() -> bool:
+	return network_client and network_client.has_method("is_online_match") and network_client.is_online_match()

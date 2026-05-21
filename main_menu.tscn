@@ -73,7 +73,7 @@ layout_mode = 0
 offset_left = 244.0
 offset_top = 152.0
 offset_right = 896.0
-offset_bottom = 401.0
+offset_bottom = 533.0
 alignment = 1
 
 [node name="StartSolo" type="Button" parent="UI/Buttons"]
@@ -103,6 +103,25 @@ popup/item_2/id = 2
 layout_mode = 2
 theme = ExtResource("4_glbon")
 text = "Versus Mode"
+
+[node name="OnlineCreate" type="Button" parent="UI/Buttons"]
+layout_mode = 2
+theme = ExtResource("4_glbon")
+text = "Create Online Match"
+
+[node name="OnlineCode" type="LineEdit" parent="UI/Buttons"]
+layout_mode = 2
+placeholder_text = "Match Code"
+
+[node name="OnlineJoin" type="Button" parent="UI/Buttons"]
+layout_mode = 2
+theme = ExtResource("4_glbon")
+text = "Join Online Match"
+
+[node name="OnlineReconnect" type="Button" parent="UI/Buttons"]
+layout_mode = 2
+theme = ExtResource("4_glbon")
+text = "Reconnect Online Match"
 
 [node name="Options" type="Button" parent="UI/Buttons"]
 layout_mode = 2
